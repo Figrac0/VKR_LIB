@@ -1,0 +1,160 @@
+.datepicker {
+    position: absolute;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 16px;
+    width: 300px;
+    z-index: 9999;
+    font-family: inherit;
+    animation: fadeIn 0.2s ease;
+
+    .datepicker-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+
+        button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+
+    .datepicker-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+    }
+
+    .datepicker-dayname {
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .datepicker-day {
+        text-align: center;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        color: #333;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        &.today {
+            border: 1px solid #007bff;
+        }
+
+        &.selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        &.in-range {
+            background-color: #e0f0ff;
+        }
+    }
+
+    .datepicker-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+
+        button {
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+
+            &.datepicker-clear {
+                background-color: #f0f0f0;
+                color: #333;
+
+                &:hover {
+                    background-color: #ddd;
+                }
+            }
+        }
+    }
+    .next-month,
+    .prev-month {
+        color: #914343;
+    }
+
+    .datepicker-close {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 18px;
+        color: #888;
+        cursor: pointer;
+        transition: color 0.2s;
+        z-index: 1;
+
+        &:hover {
+            color: #333;
+        }
+    }
+}
+
+#date {
+    width: 180px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+
+    /* Стили для placeholder */
+    &::placeholder {
+        color: #aaa;
+        font-style: italic;
+    }
+
+    /* Стили при фокусе */
+    &:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

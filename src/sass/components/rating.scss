@@ -1,0 +1,56 @@
+// rating.scss
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stars-container {
+    display: flex;
+    gap: 5px;
+}
+
+.star {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    clip-path: polygon(
+        50% 0%,
+        63% 35%,
+        98% 35%,
+        72% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        28% 57%,
+        2% 35%,
+        37% 35%
+    );
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.star.filled {
+    background-color: #f39c12; // Цвет для заполненной звезды (золотой)
+}
+
+.star:hover {
+    background-color: #f1c40f; // Цвет при наведении (для не выбранных звезд)
+}
+
+.btn-submit {
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}

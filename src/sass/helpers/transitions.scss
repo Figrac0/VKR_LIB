@@ -1,0 +1,13 @@
+$transition-default: all 0.3s ease-in-out;
+
+.transition-all {
+    transition: $transition-default;
+}
+
+.transition-opacity {
+    transition: opacity 0.3s ease;
+}
+
+.transition-transform {
+    transition: transform 0.3s ease;
+}

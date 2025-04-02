@@ -1,0 +1,17 @@
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.chart-container canvas {
+    width: 100%;
+    height: 400px;
+    display: block;
+}

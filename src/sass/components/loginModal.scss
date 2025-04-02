@@ -1,0 +1,90 @@
+/* Общие стили для кнопок и модалки */
+.login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+
+    .login-modal-content {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 400px;
+        width: 100%;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-title {
+        margin-bottom: 20px;
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+    }
+
+    .form-actions {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Для отступов между кнопками */
+
+        .btn-login,
+        .btn-switch,
+        .btn-logout {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #007bff;
+            color: white;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+
+        .btn-switch {
+            background-color: #f0f0f0;
+            color: #333;
+
+            &:hover {
+                background-color: #ddd;
+            }
+        }
+
+        .btn-logout {
+            background-color: #f44336; /* Красный цвет для кнопки выхода */
+            color: white;
+
+            &:hover {
+                background-color: #d32f2f;
+            }
+        }
+    }
+}

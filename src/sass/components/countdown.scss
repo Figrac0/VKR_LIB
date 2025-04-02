@@ -1,0 +1,81 @@
+.countdown-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px; // Немного увеличиваем ширину контейнера для лучшего отображения
+    margin: 0 auto; // Центрируем на экране
+    height: 250px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f5f5, #e3e3e3); // Градиентный фон
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); // Глубокая тень для объема
+    transform: translateY(0); // Начальная позиция для анимации
+    transition: transform 0.3s ease-out; // Плавный переход при наведении
+}
+
+.countdown-container:hover {
+    transform: translateY(-3px); // Поднятие контейнера при наведении
+}
+
+.countdown-container h3 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px; // Чуть более разреженные буквы
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); // Тень для текста
+}
+
+.countdown-container h2 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Эффект тени
+    margin: 0;
+    letter-spacing: 2px; // Разреженные цифры для более выразительного вида
+    background: linear-gradient(145deg, #fff, #f4f4f4); // Легкий градиент фона
+    transition: all 0.3s ease;
+}
+
+.countdown-container h2:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); // Увеличенная тень при наведении
+}
+
+.countdown-container h2 span {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0 12px;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.countdown-container h2 span:hover {
+    background-color: #0056b3; // Изменение фона при наведении
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); // Легкая тень
+}
+
+@keyframes pulsee {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.countdown-container h2 {
+    animation: pulsee 1s infinite; // Пульсация таймера для динамичности
+}

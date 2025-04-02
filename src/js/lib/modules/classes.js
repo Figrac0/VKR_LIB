@@ -1,35 +1,30 @@
-import $ from '../core';
+import $ from "../core";
 
-$.prototype.addClass  = function(...classNames){
-    for (let i = 0; i < this.length; i++){
-        if (!this[i].classList) {
-            continue;
-        }
-        this[i].classList.add(...classNames);
+// 🔹 Добавляет несколько классов (addClass([...]))
+$.prototype.addClass = function (...classNames) {
+    for (let i = 0; i < this.length; i++) {
+        if (!this[i].classList) continue;
+        this[i].classList.add(...classNames.flat());
     }
-
     return this;
 };
 
-$.prototype.removeClass  = function(...classNames){
-    for (let i = 0; i < this.length; i++){
-        if (!this[i].classList) {
-            continue;
-        }
-        this[i].classList.remove(...classNames);
+// 🔹 Удаляет несколько классов (removeClass([...]))
+$.prototype.removeClass = function (...classNames) {
+    for (let i = 0; i < this.length; i++) {
+        if (!this[i].classList) continue;
+        this[i].classList.remove(...classNames.flat());
     }
-
     return this;
 };
 
-$.prototype.toggleClass  = function(classNames){
-    for (let i = 0; i < this.length; i++){
-        if (!this[i].classList) {
-            continue;
-        }
-        this[i].classList.toggle(classNames);
+// 🔹 Переключает несколько классов (toggleClass([...]))
+$.prototype.toggleClass = function (...classNames) {
+    for (let i = 0; i < this.length; i++) {
+        if (!this[i].classList) continue;
+        classNames.flat().forEach((cls) => {
+            this[i].classList.toggle(cls);
+        });
     }
-
     return this;
 };
-

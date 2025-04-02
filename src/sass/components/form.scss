@@ -1,0 +1,78 @@
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-control {
+            padding: 10px 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border 0.3s;
+
+            &:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+
+            &.invalid {
+                border-color: #e74c3c;
+                background-color: #fff6f6;
+            }
+        }
+
+        .form-error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        // Отдельно checkbox
+        input[type="checkbox"].form-control {
+            width: auto;
+            height: auto;
+            margin-right: 8px;
+            display: inline-block;
+        }
+
+        // чтобы label и checkbox были в одну строку
+        input[type="checkbox"] + .form-error {
+            margin-left: 28px;
+        }
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}

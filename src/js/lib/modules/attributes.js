@@ -1,39 +1,41 @@
-import '../core';
+import "../core";
 
-$.prototype.addAtt = function(name, value) {
-  if (!name || !value || name == null || value == null) {
-    return this;
-  }
-  for (let i = 0; i < this.length; i++) {
-    this[i].setAttribute(name, value);
-  }
-  return this;
-};
+// 🔹 Устанавливает несколько атрибутов (setAttributes({ key: value }))
+$.prototype.setAttributes = function (attributes = {}) {
+    if (typeof attributes !== "object") return this;
 
-$.prototype.removeAtt = function(name) {
-    if (!name || name == null) {
-        return this;
-    }
     for (let i = 0; i < this.length; i++) {
-        this[i].removeAttribute(name);
-    }
-    return this;    
-};
-
-
-$.prototype.toggleAtt = function(name, value) {
-    if (!name || !value || name == null || value == null) {
-        return this;
-    }
-    for (let i = 0; i < this.length; i++) {
-        if (this[i].hasAttribute(name)) {
-            this[i].removeAttribute(name);
-        } else {
-            this[i].setAttribute(name, value);
+        for (let key in attributes) {
+            if (attributes[key] !== null) {
+                this[i].setAttribute(key, attributes[key]);
+            }
         }
     }
     return this;
 };
 
+// 🔹 Удаляет несколько атрибутов (removeAttributes([...]))
+$.prototype.removeAttributes = function (...names) {
+    for (let i = 0; i < this.length; i++) {
+        names.forEach((name) => {
+            this[i].removeAttribute(name);
+        });
+    }
+    return this;
+};
 
+// 🔹 Переключает несколько атрибутов (toggleAttributes({ key: value }))
+$.prototype.toggleAttributes = function (attributes = {}) {
+    if (typeof attributes !== "object") return this;
 
+    for (let i = 0; i < this.length; i++) {
+        for (let key in attributes) {
+            if (this[i].hasAttribute(key)) {
+                this[i].removeAttribute(key);
+            } else {
+                this[i].setAttribute(key, attributes[key]);
+            }
+        }
+    }
+    return this;
+};

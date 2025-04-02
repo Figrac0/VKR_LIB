@@ -1,0 +1,142 @@
+/* Базовые стили */
+body {
+    transition: background-color 2s ease, color 0.3s ease;
+}
+
+/* Светлая тема */
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Темная тема */
+body.dark-theme {
+    background-color: #2c2c2c;
+    color: #ffffff;
+}
+
+/* Стили для кнопки */
+.theme-switcher {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.theme-switcher:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для кнопки в темной теме */
+body.dark-theme .theme-switcher {
+    background-color: #444;
+}
+
+body.dark-theme {
+    background-color: #2c2c2c;
+    color: #ffffff;
+
+    // Карточки
+    .card {
+        background-color: #3b3b3b;
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+
+        &-title {
+            color: #fff;
+        }
+
+        &-text {
+            color: #ccc;
+        }
+
+        a {
+            color: #aad4ff;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+
+    // Табулятор
+    .tab {
+        &-panel {
+            background-color: #444;
+            border-bottom: 2px solid #666;
+        }
+
+        &-item {
+            background-color: #555;
+            color: #ddd;
+
+            &:hover {
+                background-color: #666;
+            }
+
+            &--active {
+                background-color: #2c2c2c;
+                color: #90cdf4;
+                box-shadow: 0 -2px 4px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        &-content {
+            background-color: #333;
+            border-color: #555;
+            color: #fff;
+        }
+    }
+
+    // Аккордеон
+    .accordion {
+        &-head {
+            background-color: #444;
+            color: #ddd;
+            border-color: rgba(255, 255, 255, 0.2);
+
+            &--active {
+                color: #90cdf4;
+            }
+        }
+
+        &-content {
+            background-color: #3a3a3a;
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        &-inner {
+            color: #eee;
+        }
+    }
+
+    // Модальные окна (если есть)
+    .modal {
+        background-color: #2a2a2a;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-header,
+    .modal-footer {
+        background-color: #3c3c3c;
+        color: #fff;
+    }
+
+    .modal-close {
+        color: #fff;
+
+        &:hover {
+            color: #90cdf4;
+        }
+    }
+
+    .btn-info {
+        color: #fff;
+    }
+}

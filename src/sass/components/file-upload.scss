@@ -1,0 +1,40 @@
+/* Стили для кнопки загрузки */
+.btn-upload {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-upload:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для кнопки отправки */
+.btn-submit {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.btn-submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Стили для отображения информации о файле */
+.file-info {
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}

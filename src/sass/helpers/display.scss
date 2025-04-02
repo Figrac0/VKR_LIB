@@ -23,3 +23,116 @@
 .f-space-between {
     justify-content: space-between;
 }
+// Отображение
+.d-inline {
+    display: inline;
+}
+.d-inline-block {
+    display: inline-block;
+}
+.d-grid {
+    display: grid;
+}
+.d-inline-flex {
+    display: inline-flex;
+}
+
+// Видимость
+.invisible {
+    opacity: 0;
+}
+.visible-opacity {
+    opacity: 1;
+}
+
+// Flex выравнивание по горизонтали
+.f-start {
+    justify-content: flex-start;
+}
+.f-end {
+    justify-content: flex-end;
+}
+.f-center {
+    justify-content: center;
+}
+.f-between {
+    justify-content: space-between;
+}
+.f-around {
+    justify-content: space-around;
+}
+.f-evenly {
+    justify-content: space-evenly;
+}
+
+// Flex выравнивание по вертикали
+.f-align-start {
+    align-items: flex-start;
+}
+.f-align-end {
+    align-items: flex-end;
+}
+.f-align-center {
+    align-items: center;
+}
+.f-align-stretch {
+    align-items: stretch;
+}
+
+// Flex направление
+.f-row {
+    flex-direction: row;
+}
+.f-column {
+    flex-direction: column;
+}
+.f-row-reverse {
+    flex-direction: row-reverse;
+}
+.f-column-reverse {
+    flex-direction: column-reverse;
+}
+
+// Обёртка flex-элементов
+.f-wrap {
+    flex-wrap: wrap;
+}
+.f-nowrap {
+    flex-wrap: nowrap;
+}
+.f-wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+// Центровка по горизонтали и вертикали
+.f-justify-center {
+    justify-content: center;
+}
+.f-align-center {
+    align-items: center;
+}
+.f-center-all {
+    justify-content: center;
+    align-items: center;
+}
+
+// Grid выравнивание
+.grid-center {
+    display: grid;
+    place-items: center;
+}
+.grid-columns-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.grid-columns-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.grid-columns-auto {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+}

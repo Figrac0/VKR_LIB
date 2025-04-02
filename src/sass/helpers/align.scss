@@ -4,3 +4,114 @@
 .block-center {
     margin: 0 auto;
 }
+// Выравнивание текста
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-justify {
+    text-align: justify;
+}
+.text-nowrap {
+    white-space: nowrap;
+}
+
+// Выравнивание блоков
+.block-start {
+    margin-left: 0;
+    margin-right: auto;
+}
+.block-end {
+    margin-left: auto;
+    margin-right: 0;
+}
+.block-inline {
+    display: inline-block;
+    margin: 0;
+}
+
+// Центровка блоков
+.block-center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+// Отступы от краев
+.m-auto {
+    margin: auto;
+}
+.mt-auto {
+    margin-top: auto;
+}
+.mb-auto {
+    margin-bottom: auto;
+}
+.ml-auto {
+    margin-left: auto;
+}
+.mr-auto {
+    margin-right: auto;
+}
+
+// Фиксированные размеры
+.width-100 {
+    width: 100%;
+}
+.width-75 {
+    width: 75%;
+}
+.width-50 {
+    width: 50%;
+}
+.width-25 {
+    width: 25%;
+}
+
+.height-100 {
+    height: 100%;
+}
+.height-75 {
+    height: 75%;
+}
+.height-50 {
+    height: 50%;
+}
+.height-25 {
+    height: 25%;
+}
+
+// Обёртка блоков
+.wrap {
+    overflow: hidden;
+}
+
+// Максимальная ширина
+.max-width-100 {
+    max-width: 100%;
+}
+.max-width-75 {
+    max-width: 75%;
+}
+.max-width-50 {
+    max-width: 50%;
+}
+.max-width-25 {
+    max-width: 25%;
+}
+
+// Минимальная ширина
+.min-width-100 {
+    min-width: 100%;
+}
+.min-width-75 {
+    min-width: 75%;
+}
+.min-width-50 {
+    min-width: 50%;
+}
+.min-width-25 {
+    min-width: 25%;
+}

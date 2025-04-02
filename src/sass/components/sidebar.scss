@@ -1,0 +1,140 @@
+.sidebar-button {
+    position: fixed;
+    left: 7px;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #ddd, #ccc, #999);
+
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: pulse 5s infinite;
+    z-index: 1000;
+    transition: background 0.3s ease, transform 0.5s ease, top 0.5s ease; /* Плавный переход */
+}
+
+/* Стиль для активной кнопки */
+.sidebar-button.active {
+    background: linear-gradient(45deg, #333, #ddd, #999);
+    transform: rotate(360deg); /* Переворот кнопки */
+    top: 8%; /* Перемещение кнопки вверх после клика */
+}
+
+/* Анимация пульсации кнопки */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* Стиль для sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px; /* Ширина сайдбара */
+    height: auto;
+    background-color: #ccc;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 999;
+    padding: 10px 0;
+    transition: all 0.5s ease;
+    overflow-y: auto;
+}
+
+/* Ссылки на социальные сети */
+.social-link {
+    display: block;
+    padding: 12px;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+/* При наведении на ссылку */
+.social-link:hover {
+    background-color: #e2e2e2;
+    color: #333;
+}
+
+/* Стили для иконок */
+.social-link svg {
+    width: 24px; /* Уменьшаем размер иконок */
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* При наведении на иконку */
+.social-link:hover svg {
+    transform: scale(1.2); /* Увеличение иконки при наведении */
+}
+
+/* Анимация появления toast */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.toast {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    animation: toastShow 1s forwards;
+}
+
+.toast-error {
+    background-color: #e74c3c;
+}
+
+.toast-info {
+    background-color: #3498db;
+}
+
+.toast-hide {
+    animation: toastHide 1s forwards;
+}
+
+/* Анимация появления toast */
+@keyframes toastShow {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Анимация скрытия toast */
+@keyframes toastHide {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

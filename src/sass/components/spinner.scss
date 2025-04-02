@@ -1,0 +1,35 @@
+.spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+
+    &-small {
+        width: 30px;
+        height: 30px;
+        border-width: 3px;
+    }
+
+    &-medium {
+        width: 50px;
+        height: 50px;
+        border-width: 4px;
+    }
+
+    &-large {
+        width: 70px;
+        height: 70px;
+        border-width: 5px;
+    }
+}
+
+@keyframes spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

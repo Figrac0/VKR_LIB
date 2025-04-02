@@ -1,6 +1,6 @@
-import $ from '../core';
+import $ from "../core";
 //Управляет содержимым HTML-элементов. Возвращает или устанавливает HTML-содержимое выбранных элементов.
-$.prototype.html = function(content) {
+$.prototype.html = function (content) {
     for (let i = 0; i < this.length; i++) {
         if (content) {
             this[i].innerHTML = content;
@@ -12,7 +12,7 @@ $.prototype.html = function(content) {
     return this;
 };
 //Выбирает элемент по индексу. Оставляет только один элемент из коллекции, соответствующий указанному индексу.
-$.prototype.eq = function(i) {
+$.prototype.eq = function (i) {
     const swap = this[i];
     const objLength = Object.keys(this).length;
 
@@ -25,7 +25,7 @@ $.prototype.eq = function(i) {
     return this;
 };
 //Определяет позицию текущего элемента среди его соседних элементов в родительском узле.
-$.prototype.index = function() {
+$.prototype.index = function () {
     const parent = this[0].parentNode;
     const childs = [...parent.children];
 
@@ -36,8 +36,7 @@ $.prototype.index = function() {
     return childs.findIndex(findMyIndex);
 };
 //Находит потомков элементов по селектору. Возвращает элементы, соответствующие заданному CSS-селектору внутри текущего набора элементов.
-$.prototype.find = function(selector) {
-
+$.prototype.find = function (selector) {
     // Переменная для хранения общего числа найденных элементов.
     let numberOfItems = 0;
 
@@ -49,7 +48,6 @@ $.prototype.find = function(selector) {
 
     // Цикл проходит по всем элементам в `copyObj`.
     for (let i = 0; i < copyObj.length; i++) {
-
         // Используем `querySelectorAll`, чтобы найти все элементы внутри текущего элемента,
         // которые соответствуют заданному селектору.
         const arr = copyObj[i].querySelectorAll(selector);
@@ -99,11 +97,11 @@ $.prototype.find = function(selector) {
 //     return this;
 // };
 
-$.prototype.closest = function(selector) {
+$.prototype.closest = function (selector) {
     // Создаем массив, чтобы хранить элементы, удовлетворяющие селектору
     let result = [];
-    
-    // Проходим по каждому элементу 
+
+    // Проходим по каждому элементу
     for (let i = 0; i < this.length; i++) {
         // Находим ближайшего предка для текущего элемента, соответствующего селектору
         const closestElement = this[i].closest(selector);
@@ -129,7 +127,7 @@ $.prototype.closest = function(selector) {
     return this;
 };
 
-$.prototype.siblings = function() {
+$.prototype.siblings = function () {
     let numberOfItems = 0;
     let counter = 0;
 

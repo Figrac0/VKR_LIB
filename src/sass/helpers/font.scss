@@ -31,3 +31,161 @@
 .text-color-dark {
     color: $dark;
 }
+// Размеры шрифта
+.fz-12 {
+    font-size: 12px;
+}
+.fz-14 {
+    font-size: 14px;
+}
+.fz-18 {
+    font-size: 18px;
+}
+.fz-22 {
+    font-size: 22px;
+}
+.fz-26 {
+    font-size: 26px;
+}
+.fz-28 {
+    font-size: 28px;
+}
+.fz-30 {
+    font-size: 30px;
+}
+.fz-32 {
+    font-size: 32px;
+}
+.fz-36 {
+    font-size: 36px;
+}
+
+// Жирный шрифт
+.bold-500 {
+    font-weight: 500;
+}
+.bold-700 {
+    font-weight: 700;
+}
+.bold-900 {
+    font-weight: 900;
+}
+
+// Курсив
+.italic-bold {
+    font-weight: bold;
+    font-style: italic;
+}
+
+// Цвет текста (использование переменных, если они есть в SCSS)
+.text-color-primary {
+    color: $primary;
+}
+.text-color-danger {
+    color: $danger;
+}
+.text-color-success {
+    color: $success;
+}
+.text-color-warning {
+    color: $warning;
+}
+.text-color-dark {
+    color: $dark;
+}
+.text-color-light {
+    color: #f8f9fa;
+}
+.text-color-muted {
+    color: #6c757d;
+}
+
+// Подчеркивание текста
+.text-underline {
+    text-decoration: underline;
+}
+.text-line-through {
+    text-decoration: line-through;
+}
+.text-overline {
+    text-decoration: overline;
+}
+
+// Выравнивание текста
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+
+// Цвет фона для текста
+.bg-primary {
+    background-color: $primary;
+}
+.bg-danger {
+    background-color: $danger;
+}
+.bg-success {
+    background-color: $success;
+}
+.bg-warning {
+    background-color: $warning;
+}
+.bg-dark {
+    background-color: $dark;
+}
+
+// Размеры межстрочного интервала
+.lh-1 {
+    line-height: 1;
+}
+.lh-1-5 {
+    line-height: 1.5;
+}
+.lh-2 {
+    line-height: 2;
+}
+
+// Отступы для текста (padding для текста)
+.pt-5 {
+    padding-top: 5px;
+}
+.pr-5 {
+    padding-right: 5px;
+}
+.pb-5 {
+    padding-bottom: 5px;
+}
+.pl-5 {
+    padding-left: 5px;
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+.pr-10 {
+    padding-right: 10px;
+}
+.pb-10 {
+    padding-bottom: 10px;
+}
+.pl-10 {
+    padding-left: 10px;
+}
+
+.pt-20 {
+    padding-top: 20px;
+}
+.pr-20 {
+    padding-right: 20px;
+}
+.pb-20 {
+    padding-bottom: 20px;
+}
+.pl-20 {
+    padding-left: 20px;
+}

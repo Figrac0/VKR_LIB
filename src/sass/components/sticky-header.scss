@@ -1,0 +1,51 @@
+/* Основной стиль для header */
+.sticky-header {
+    position: relative;
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    z-index: 1000;
+    width: fit-content; /* Автоматическая подгонка ширины под содержимое */
+    transition: all 0.3s ease; /* Плавный переход для всех изменений */
+    box-shadow: none; /* Убираем тень до того, как становится sticky */
+    margin: 0 auto; /* Центрируем по горизонтали */
+    border-radius: 15px;
+}
+
+/* Когда элемент становится "прилипающим" */
+.sticky-header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Появляется тень */
+    transition: top 0.3s ease, box-shadow 0.3s ease; /* Плавное изменение */
+}
+
+/* Стиль для навигации */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    margin: 0 10px 0 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Добавление стилей для активного состояния кнопки */
+button.active {
+    background-color: #28a745;
+}

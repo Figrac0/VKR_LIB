@@ -1,41 +1,103 @@
-.dropdown{
+// Основной контейнер дропдауна
+.dropdown {
     position: relative;
     display: inline-block;
-    &-toggle{
-        &:after{
-            content:'';
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    // Стиль для кнопки (или триггера) дропдауна
+    &-toggle {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: 1px solid #007bff;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+
+        &:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        // Стрелка после кнопки
+        &:after {
+            content: "";
             display: inline-block;
-            margin-left: 5px;
-            vertical-align: 3px;
+            margin-left: 8px;
+            vertical-align: middle;
             border-top: 4px solid;
             border-right: 4px solid transparent;
             border-bottom: 0;
             border-left: 4px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        // Поворот стрелки при открытии меню
+        &.open:after {
+            transform: rotate(180deg);
         }
     }
 
-    &-menu{
+    // Меню дропдауна
+    &-menu {
         position: absolute;
         top: 100%;
         left: 0;
         z-index: 100;
         display: none;
-        border: 1px solid rgba(0,0,0,.15);
-        border-radius: 2px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
         background-color: #fff;
-        min-width: 100%;
+        min-width: 160px;
         padding: 10px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.3s ease-out;
+
+        // Появление меню с анимацией
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     }
-    &-item{
+
+    // Элементы меню
+    &-item {
         display: block;
         width: 100%;
-        padding: 7px 10px;
-        color: $dark;
+        padding: 10px 15px;
+        color: #333;
         background-color: transparent;
         border: 0;
         text-decoration: none;
-        &:hover{
-            background-color: rgba(0,0,0, .05);
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, padding-left 0.3s ease;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding-left: 25px;
+        }
+
+        // Активное состояние
+        &.active {
+            background-color: #f0f8ff;
+            color: #007bff;
         }
     }
+}
+
+// Показать меню, когда оно активно
+.open + .dropdown-menu {
+    display: block;
 }
