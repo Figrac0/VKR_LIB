@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#about").on("click", () => Router.navigate("/about"));
     $("#contact").on("click", () => Router.navigate("/contact"));
     $("#extra").on("click", () => Router.navigate("/extra"));
-    //history
-    Router.init("history");
+
+    Router.init("hash");
 });
 
 Router.component("HomePage", {

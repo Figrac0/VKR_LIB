@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home Page</title>
+
+        <!-- Библиотека компонентов -->
+        <link rel="stylesheet" href="css/lib.css" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <main class="container mt-40">
+            <h1 class="text-center">Добро пожаловать в наш магазин!</h1>
+
+            <!-- Карусель -->
+            <div class="carousel mt-20" id="main-carousel">
+                <ol class="carousel-indicators">
+                    <li class="active" data-slide-to="0"></li>
+                    <li data-slide-to="1"></li>
+                    <li data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-slides">
+                        <div class="carousel-item">
+                            <img
+                                src="https://stoneforest.ru/wp-content/uploads/2018/10/AF1-nba-utility-1.jpg"
+                                alt="1"
+                            />
+                        </div>
+                        <div class="carousel-item">
+                            <img
+                                src="https://imgproxy.cdn-tinkoff.ru/t_device_1920_x2/aHR0cHM6Ly9wdWJsaWMtc3RhdGljLnRpbmtvZmZqb3VybmFsLnJ1L2RvbHlhbWUvdXBsb2Fkcy8yMDI0LzEyL3JZaG84VzVGLWNvdmVyLWgucG5n"
+                                alt="2"
+                            />
+                        </div>
+                        <div class="carousel-item">
+                            <img
+                                src="https://mpost.io/wp-content/uploads/RTFKT-and-Nike-announce-phygital-sneakers-forging-event.jpg"
+                                alt="3"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="carousel-prev" data-slide="prev"
+                    ><span class="carousel-prev-icon">&lt;</span></a
+                >
+                <a href="#" class="carousel-next" data-slide="next"
+                    ><span class="carousel-next-icon">&gt;</span></a
+                >
+            </div>
+
+            <!-- Таймер акции -->
+            <div class="mt-40 mb-20 text-center">
+                <h2>🔥 Успей купить по акции!</h2>
+                <div id="countdown"></div>
+            </div>
+
+            <!-- Табы -->
+            <div class="tab mt-40 block-center">
+                <div class="tab-panel" data-tabpanel>
+                    <div class="tab-item tab-item--active">Новинки</div>
+                    <div class="tab-item">Популярное</div>
+                    <div class="tab-item">Скидки</div>
+                </div>
+
+                <div class="tab-content tab-content--active">
+                    <p>
+                        👟 Весна/Лето 2025 — это время ярких цветов
+                        и технологичных решений! Среди новинок —
+                        <strong>Nike Air Max Pulse</strong>,
+                        <strong>Adidas Ultraboost 24</strong>,
+                        <strong>Puma Velocity Nitro</strong>.
+                    </p>
+                </div>
+                <div class="tab-content">
+                    <p>
+                        🔥 Самые популярные —
+                        <strong>Nike Dunk Low Panda</strong>,
+                        <strong>New Balance 550</strong>,
+                        <strong>Converse Run Star Hike</strong>.
+                    </p>
+                </div>
+                <div class="tab-content">
+                    <p>
+                        💸 Скидки: <strong>Reebok Classic Leather</strong> 30%,
+                        <strong>Asics Gel‑Kayano 30</strong> 25%,
+                        <strong>Fila Disruptor</strong> 40%.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="mt-40 mb-20 text-center">Наши аксессуары!</h2>
+
+            <!-- Мини‑галерея -->
+            <div class="gallery mt-40">
+                <a
+                    href="https://img.alicdn.com/imgextra/i4/TB1.QwxKVXXXXabXFXXXXXXXXXX_!!0-item_pic.jpg"
+                    data-lightbox
+                >
+                    <img
+                        src="https://cs1.livemaster.ru/storage/a7/86/d81b9ac14ce1ee8484a9d931ebcl--materialy-dlya-tvorchestva-shnurki-ploskie-s-metallicheskimi-.jpg"
+                        alt="img1"
+                    />
+                </a>
+                <a
+                    href="https://ae04.alicdn.com/kf/Saa8d04ca923a4e2a9bb40459917e803ag.jpg_480x480.jpg"
+                    data-lightbox
+                >
+                    <img
+                        src="https://ae04.alicdn.com/kf/S90b0718cd51a4efe88a6ac3093648b19s.jpg_480x480.jpg"
+                        alt="img2"
+                    />
+                </a>
+                <a
+                    href="https://i.siteapi.org/VMq-EcopRgKmU2509TKdAyDMN6Y=/fit-in/1024x768/center/top/f9bec4084cb3f03.ru.s.siteapi.org/img/420abf89367c5fe8573e393737f29fc102a566b0.jpg"
+                    data-lightbox
+                >
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWKu_iR_EC9YmUYLCm7gRvUDUnS6EPpfCr5w&s"
+                        alt="img3"
+                    />
+                </a>
+            </div>
+
+            <!-- Тултип и Тост -->
+            <div class="text-center mt-20">
+                <button
+                    class="btn btn-info mb-30"
+                    data-tooltip="Это кнопка уведомления"
+                    data-toast
+                    data-toast-message="Товар добавлен!"
+                    data-toast-type="success"
+                >
+                    Добавить в корзину
+                </button>
+            </div>
+
+            <!-- Футер -->
+            <footer class="footer">
+                <div class="footer-container">
+                    <div class="footer-logo">
+                        <h2 class="footer-title">👟 SneakerStore</h2>
+                        <p class="footer-subtitle">
+                            Лучшие кроссовки — только у нас!
+                        </p>
+                    </div>
+
+                    <div class="footer-links">
+                        <h4 class="footer-heading">Навигация</h4>
+                        <ul class="footer-list">
+                            <li>
+                                <a href="#/" class="footer-link">Главная</a>
+                            </li>
+                            <li>
+                                <a href="#/catalog" class="footer-link"
+                                    >Каталог</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#/contact" class="footer-link"
+                                    >Контакты</a
+                                >
+                            </li>
+                            <li>
+                                <a href="#/about" class="footer-link">О нас</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-social">
+                        <h4 class="footer-heading">Мы в соцсетях</h4>
+                        <div class="footer-icons">
+                            <a href="#" class="footer-icon">📸 Instagram</a>
+                            <a href="#" class="footer-icon">💬 Telegram</a>
+                            <a href="#" class="footer-icon">🌐 VK</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="footer-copy">
+                        &copy; 2025 SneakerStore — Все права защищены
+                    </p>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Скрипты -->
+        <script src="js/lib.js"></script>
+        <script src="js/script.js"></script>
+
+        <!-- Локальная инициализация плагинов -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                $("#main-carousel").carousel();
+                $("#countdown").countdown({
+                    endDate: "2025-12-31 23:59:59",
+                    labelText: "До конца года осталось:",
+                });
+                $("[data-tabpanel] .tab-item").tab();
+                $("[data-lightbox]").lightbox();
+                $("[data-tooltip]").tooltip();
+            });
+        </script>
+
+        <style>
+            .footer {
+                background: #1a1a1a;
+                color: #f0f0f0;
+                width: 100%;
+                padding: 20px 10px 10px;
+            }
+            .footer-container {
+                background: #1a1a1a;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                max-width: 1200px;
+                margin: 0 auto;
+                gap: 40px;
+            }
+            .footer-title {
+                font-size: 18px;
+                margin-bottom: 10px;
+                color: #fff;
+            }
+            .footer-subtitle {
+                font-size: 14px;
+                color: #aaa;
+            }
+            .footer-links,
+            .footer-social {
+                flex: 1 1 200px;
+            }
+            .footer-heading {
+                font-size: 14px;
+                margin-bottom: 12px;
+                color: #fff;
+            }
+            .footer-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .footer-list li {
+                margin-bottom: 8px;
+            }
+            .footer-link {
+                color: #ccc;
+                text-decoration: none;
+            }
+            .footer-link:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+            .footer-icons {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .footer-icon {
+                color: #ccc;
+                text-decoration: none;
+            }
+            .footer-icon:hover {
+                color: #fff;
+            }
+            .footer-bottom {
+                border-top: 1px solid #333;
+                margin-top: 5px;
+                padding-top: 5px;
+                text-align: center;
+                font-size: 13px;
+                color: #888;
+            }
+        </style>
+    </body>
+</html>

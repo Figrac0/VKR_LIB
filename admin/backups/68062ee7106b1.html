@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <title>Каталог товаров</title>
+
+        <link rel="stylesheet" href="css/lib.css" />
+        <link rel="stylesheet" href="css/style.css" />
+
+        <style>
+            .catalog-grid {
+                display: grid;
+                gap: 24px;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            .card {
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                background: #fff;
+            }
+            .card-img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+            .card-body {
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+            .card-title {
+                font-size: 18px;
+                margin: 0 0 8px;
+            }
+            .card-price {
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
+            .badge-sale {
+                color: #c00;
+                font-size: 14px;
+                margin-left: 4px;
+            }
+            .card-text {
+                font-size: 14px;
+                color: #555;
+                flex: 1;
+            }
+            .btn-group {
+                display: flex;
+                gap: 8px;
+                margin-top: 12px;
+            }
+        </style>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+    </head>
+    <body>
+        <main class="container mt-40">
+            <h1 class="text-center mb-20">Каталог товаров</h1>
+
+            <div class="catalog-grid">
+                <!-- 1 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://sneaker-street.ru/image/catalog/foto/FN6957-100/1__w-825__h-825__f-jpg.jpg"
+                            alt="Кроссовки Nike Air Max"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Кроссовки Nike Air Max</h3>
+                        <div class="catalog-price">
+                            8 990 ₽ <span class="catalog-discount">‑10%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Классические кроссовки Nike с отличной амортизацией.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://myreact.ru/storage/catalog/products/2504/thumbnail/lzLOgb.png"
+                            alt="Adidas Ultraboost 24"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Adidas Ultraboost 24</h3>
+                        <div class="catalog-price">
+                            10 490 ₽ <span class="catalog-discount">‑10%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Современные беговые кроссовки с амортизацией Boost.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://cdn.urbanvibes.com/upload/mdm/media_content/resize/4d3/1000_1000_a650/77502400299.jpg"
+                            alt="Puma RS‑X"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Puma RS‑X</h3>
+                        <div class="catalog-price">
+                            7 990 ₽ <span class="catalog-discount">‑20%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Яркие кроссовки с ретро‑дизайном. Вдохновлены 80‑ми
+                            годами.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://sneaker-street.ru/image/catalog/foto/BB550STG/1__w-825__h-825__f-jpg.jpg"
+                            alt="New Balance 550"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">New Balance 550</h3>
+                        <div class="catalog-price">
+                            8 690 ₽ <span class="catalog-discount">‑12%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Модель в стиле ретро‑баскетбольной обуви,
+                            натуральная кожа.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://m.sportkult.ru/ipreview/goods/820/820/011B764-100_26729__single_.jpg"
+                            alt="Reebok Classic Leather"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Reebok Classic Leather</h3>
+                        <div class="catalog-price">
+                            5 990 ₽ <span class="catalog-discount">‑30%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Иконические кроссовки на каждый день, комфорт
+                            и стиль.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://run365.ru/wp-content/uploads/2023/12/1011B548-001.jpg"
+                            alt="Asics Gel‑Kayano 30"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Asics Gel‑Kayano 30</h3>
+                        <div class="catalog-price">
+                            9 990 ₽ <span class="catalog-discount">‑25%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Максимальная стабильность и поддержка на длинных
+                            пробежках.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://myreact.ru/storage/catalog/products/UY9QjD.jpg"
+                            alt="Nike Dunk Low Panda"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Nike Dunk Low Panda</h3>
+                        <div class="catalog-price">
+                            8 590 ₽ <span class="catalog-discount">‑5%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Самая хайповая чёрно‑белая модель сезона,
+                            универсальный стиль.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://i.siteapi.org/oHhxhaVufsSSrE5_Ro_8FUwjkoM=/fit-in/330x/top/s2.siteapi.org/0024b9c2210848f/img/d5a2hrsta20ow8cogwwo40w48gowow"
+                            alt="Converse Run Star Hike"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Converse Run Star Hike</h3>
+                        <div class="catalog-price">
+                            7 590 ₽ <span class="catalog-discount">‑18%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Фирменный стиль Converse с массивной подошвой для
+                            уличной моды.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://i.siteapi.org/x6lVYT4Nhcyst_5gWZWTTqTb7Xg=/fit-in/330x/top/35fc4a469a2f47d.s2.siteapi.org/img/4gzycett1nggwkw084kkc00scc88k0"
+                            alt="Fila Disruptor II"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Fila Disruptor II</h3>
+                        <div class="catalog-price">
+                            6 490 ₽ <span class="catalog-discount">‑40%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Массивный силуэт, привлекающий внимание; смелый
+                            городской образ.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://slamdunk.shop/wp-content/uploads/2023/04/Air-Jordan-1-Mid-Bred-Toe.jpg"
+                            alt="Jordan 1 Mid Bred"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Jordan 1 Mid Bred</h3>
+                        <div class="catalog-price">
+                            11 490 ₽ <span class="catalog-discount">‑8%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Легендарный силуэт; история баскетбола в каждой
+                            паре.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://optim.tildacdn.com/tild3666-6365-4964-b034-333431646432/-/format/webp/16586460_32420795_20.jpg.webp"
+                            alt="Yeezy Boost 350 V2"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Yeezy Boost 350 V2</h3>
+                        <div class="catalog-price">
+                            16 990 ₽ <span class="catalog-discount">‑10%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Стиль Kanye West + пенка Boost для максимального
+                            комфорта.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="catalog-card">
+                    <div class="catalog-img">
+                        <img
+                            src="https://www.центрбега.рф/upload/iblock/e03/7nutll4e8so75t0wktu4k34l8ql1tl18.jpg"
+                            alt="Nike ZoomX Invincible"
+                        />
+                    </div>
+                    <div class="catalog-body">
+                        <h3 class="catalog-title">Nike ZoomX Invincible</h3>
+                        <div class="catalog-price">
+                            10 990 ₽ <span class="catalog-discount">‑20%</span>
+                        </div>
+                        <p class="catalog-description">
+                            Пена ZoomX — рекордные мягкость и возврат энергии на
+                            каждом шаге.
+                        </p>
+                        <div class="catalog-actions">
+                            <button class="btn-buy">Купить</button>
+                            <button class="btn-details">Подробнее</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /catalog-grid -->
+
+            <!-- Консультация (без JS‑функций, как просили) -->
+            <div class="consultation mt-40 p-20 block-center text-center">
+                <h2 class="mb-10">Запишитесь на консультацию</h2>
+                <p class="mb-10">
+                    Выберите удобную дату и нажмите «Записаться»
+                </p>
+
+                <input
+                    type="text"
+                    class="form-control mb-30"
+                    placeholder="Выберите диапазон"
+                />
+                <button class="btn btn-success">Записаться</button>
+            </div>
+        </main>
+    </body>
+</html>
