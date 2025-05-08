@@ -1056,7 +1056,7 @@
   background: #fff;
   padding: 30px;
   border-radius: 12px;
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
@@ -1586,6 +1586,15 @@ body.dark-theme .modal-close:hover {
   color: #90cdf4;
 }
 body.dark-theme .btn-info {
+  color: #fff;
+}
+body.dark-theme .btn-secondary {
+  color: #fff;
+}
+body.dark-theme .btn-outline {
+  color: #fff;
+}
+body.dark-theme .btn-outline-secondary {
   color: #fff;
 }
 

@@ -145,34 +145,42 @@ $.prototype.loginModal = function (options = {}) {
 
                 // Валидация
                 if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                    $(modal).showToast("Введите корректный email.", "error");
+                    $.toast({
+                        message: "Введите корректный email.",
+                        type: "error",
+                    });
                     return;
                 }
 
                 if (mode === "register") {
                     if (!name || !/^[А-ЯЁA-Z][а-яёa-z]+$/.test(name)) {
-                        $(modal).showToast(
-                            "Имя должно начинаться с заглавной буквы.",
-                            "error"
-                        );
+                        $.toast({
+                            message: "Имя должно начинаться с заглавной буквы.",
+                            type: "error",
+                        });
                         return;
                     }
                     if (!/^\+7-\d{3}-\d{3}-\d{2}-\d{2}$/.test(phone)) {
-                        $(modal).showToast(
-                            "Введите корректный телефон в формате +7-XXX-XXX-XX-XX.",
-                            "error"
-                        );
+                        $.toast({
+                            message:
+                                "Введите корректный телефон в формате +7-XXX-XXX-XX-XX.",
+                            type: "error",
+                        });
                         return;
                     }
                     if (password !== confirmPassword) {
-                        $(modal).showToast("Пароли не совпадают.", "error");
+                        $.toast({
+                            message: "Пароли не совпадают.",
+                            type: "error",
+                        });
                         return;
                     }
                     if (password.length < 6) {
-                        $(modal).showToast(
-                            "Пароль должен содержать минимум 6 символов.",
-                            "error"
-                        );
+                        $.toast({
+                            message:
+                                "Пароль должен содержать минимум 6 символов.",
+                            type: "error",
+                        });
                         return;
                     }
 
@@ -184,7 +192,7 @@ $.prototype.loginModal = function (options = {}) {
                 if (mode === "register") {
                     Store.setState("authUser", payload);
                     localStorage.setItem("authUser", JSON.stringify(payload));
-                    $(modal).showToast("Добро пожаловать!", "success");
+                    $.toast({ message: "Добро пожаловать!", type: "success" });
                     closeModal();
                 } else if (mode === "login") {
                     // Логика входа
@@ -196,14 +204,17 @@ $.prototype.loginModal = function (options = {}) {
                         savedUser.email === email &&
                         savedUser.password === password
                     ) {
-                        $(modal).showToast("Вы успешно вошли!", "success");
+                        $.toast({
+                            message: "Вы успешно вошли!",
+                            type: "success",
+                        });
                         Store.setState("authUser", savedUser);
                         closeModal();
                     } else {
-                        $(modal).showToast(
-                            "Неверные данные. Зарегистрируйтесь.",
-                            "error"
-                        );
+                        $.toast({
+                            message: "Неверные данные. Зарегистрируйтесь.",
+                            type: "error",
+                        });
                     }
                 }
             });
@@ -211,10 +222,19 @@ $.prototype.loginModal = function (options = {}) {
             // Выход из аккаунта
             const logoutButton = form.querySelector(".btn-logout");
             logoutButton.addEventListener("click", () => {
-                // Удаляем данные из localStorage и сбрасываем состояние
+                const savedUser = localStorage.getItem("authUser");
+
+                if (!savedUser) {
+                    $.toast({
+                        message: "Вы уже вышли!",
+                        type: "error",
+                    });
+                    return;
+                }
+
                 localStorage.removeItem("authUser");
                 Store.setState("authUser", null);
-                $(modal).showToast("Вы вышли из аккаунта", "success");
+                $.toast({ message: "Вы вышли из аккаунта", type: "success" });
                 closeModal();
             });
         };

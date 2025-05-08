@@ -1,16 +1,12 @@
 import $ from "../core";
-import Chart from "chart.js/auto"; // Подключаем Chart.js
+import Chart from "chart.js/auto";
 
 $.prototype.chart = function (options = {}) {
     const defaultOptions = {
-        type: "line", // Тип графика по умолчанию (линейный)
-        labels: [], // Метки на оси X
-        data: [], // Данные для графика
-        backgroundColor: "rgba(75, 192, 192, 0.2)", // Цвет фона графика
-        borderColor: "rgba(75, 192, 192, 1)", // Цвет линии
-        borderWidth: 1, // Толщина линии
-        fill: true, // Заполнение области под графиком
-        title: "График", // Заголовок графика
+        type: "line",
+        labels: [],
+        datasets: [], // теперь можно передавать массив
+        title: "График",
     };
 
     const config = { ...defaultOptions, ...options };
@@ -18,25 +14,18 @@ $.prototype.chart = function (options = {}) {
     return this.each(function () {
         const container = this;
 
-        // Создаем canvas элемент для отображения графика
+        // Удаляем старый canvas, если есть
+        const oldCanvas = container.querySelector("canvas");
+        if (oldCanvas) oldCanvas.remove();
+
         const canvas = document.createElement("canvas");
         container.appendChild(canvas);
 
-        // Создаем график с настройками
         new Chart(canvas, {
             type: config.type,
             data: {
                 labels: config.labels,
-                datasets: [
-                    {
-                        label: config.title,
-                        data: config.data,
-                        backgroundColor: config.backgroundColor,
-                        borderColor: config.borderColor,
-                        borderWidth: config.borderWidth,
-                        fill: config.fill,
-                    },
-                ],
+                datasets: config.datasets,
             },
             options: {
                 responsive: true,
@@ -44,6 +33,12 @@ $.prototype.chart = function (options = {}) {
                     title: {
                         display: true,
                         text: config.title,
+                        font: {
+                            size: 18,
+                        },
+                    },
+                    legend: {
+                        position: "top",
                     },
                 },
             },

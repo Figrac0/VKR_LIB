@@ -2,21 +2,24 @@ import $ from "../core";
 
 $.prototype.countdown = function (options = {}) {
     const defaultOptions = {
-        endDate: "2025-12-31 23:59:59", // Default end date (can be set by user)
-        format: "MM:DD:HH:MM", // The format of the countdown
-        labelText: "До конца акции:", // Default text (can be customized by user)
+        endDate: "2025-12-31 23:59:59",
+        format: "MM:DD:HH:MM",
+        labelText: "До конца акции:",
     };
 
     const config = { ...defaultOptions, ...options };
 
     return this.each(function () {
+        // 💡 Очистка предыдущего таймера, если был
+        if (this._countdownTimer) {
+            clearInterval(this._countdownTimer);
+        }
+
         const container = document.createElement("div");
         container.classList.add("countdown-container");
 
-        // Function to format time
         const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
-        // Function to update the countdown
         const updateCountdown = () => {
             const endDate = new Date(config.endDate);
             const now = new Date();
@@ -24,6 +27,7 @@ $.prototype.countdown = function (options = {}) {
 
             if (timeLeft <= 0) {
                 container.innerHTML = "<h2>Акция завершена!</h2>";
+                clearInterval(this._countdownTimer);
                 return;
             }
 
@@ -46,8 +50,9 @@ $.prototype.countdown = function (options = {}) {
         };
 
         updateCountdown();
-        setInterval(updateCountdown, 1000); // Update every second
+        this._countdownTimer = setInterval(updateCountdown, 1000);
 
-        document.body.appendChild(container);
+        this.innerHTML = ""; // Очищаем
+        this.appendChild(container);
     });
 };

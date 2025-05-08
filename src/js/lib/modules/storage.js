@@ -1,3 +1,5 @@
+import $ from "../core";
+
 const Storage = {
     setItem(key, value) {
         try {
@@ -86,5 +88,5 @@ const Storage = {
         });
     },
 };
-
+window.Storage = Storage;
 export default Storage;

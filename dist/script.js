@@ -235,25 +235,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 /* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.js");
 
- // Подключаем Chart.js
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.chart = function (options = {}) {
   const defaultOptions = {
     type: "line",
-    // Тип графика по умолчанию (линейный)
     labels: [],
-    // Метки на оси X
-    data: [],
-    // Данные для графика
-    backgroundColor: "rgba(75, 192, 192, 0.2)",
-    // Цвет фона графика
-    borderColor: "rgba(75, 192, 192, 1)",
-    // Цвет линии
-    borderWidth: 1,
-    // Толщина линии
-    fill: true,
-    // Заполнение области под графиком
-    title: "График" // Заголовок графика
+    datasets: [],
+    // теперь можно передавать массив
+    title: "График"
   };
   const config = {
     ...defaultOptions,
@@ -262,30 +251,29 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.chart = function (option
   return this.each(function () {
     const container = this;
 
-    // Создаем canvas элемент для отображения графика
+    // Удаляем старый canvas, если есть
+    const oldCanvas = container.querySelector("canvas");
+    if (oldCanvas) oldCanvas.remove();
     const canvas = document.createElement("canvas");
     container.appendChild(canvas);
-
-    // Создаем график с настройками
     new chart_js_auto__WEBPACK_IMPORTED_MODULE_1__["default"](canvas, {
       type: config.type,
       data: {
         labels: config.labels,
-        datasets: [{
-          label: config.title,
-          data: config.data,
-          backgroundColor: config.backgroundColor,
-          borderColor: config.borderColor,
-          borderWidth: config.borderWidth,
-          fill: config.fill
-        }]
+        datasets: config.datasets
       },
       options: {
         responsive: true,
         plugins: {
           title: {
             display: true,
-            text: config.title
+            text: config.title,
+            font: {
+              size: 18
+            }
+          },
+          legend: {
+            position: "top"
           }
         }
       }
@@ -308,29 +296,28 @@ __webpack_require__.r(__webpack_exports__);
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.countdown = function (options = {}) {
   const defaultOptions = {
     endDate: "2025-12-31 23:59:59",
-    // Default end date (can be set by user)
     format: "MM:DD:HH:MM",
-    // The format of the countdown
-    labelText: "До конца акции:" // Default text (can be customized by user)
+    labelText: "До конца акции:"
   };
   const config = {
     ...defaultOptions,
     ...options
   };
   return this.each(function () {
+    // 💡 Очистка предыдущего таймера, если был
+    if (this._countdownTimer) {
+      clearInterval(this._countdownTimer);
+    }
     const container = document.createElement("div");
     container.classList.add("countdown-container");
-
-    // Function to format time
     const formatTime = time => time < 10 ? `0${time}` : time;
-
-    // Function to update the countdown
     const updateCountdown = () => {
       const endDate = new Date(config.endDate);
       const now = new Date();
       const timeLeft = endDate - now;
       if (timeLeft <= 0) {
         container.innerHTML = "<h2>Акция завершена!</h2>";
+        clearInterval(this._countdownTimer);
         return;
       }
       const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -345,9 +332,9 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.countdown = function (op
       container.innerHTML = `<h3>${config.labelText}</h3><h2>${formattedTime}</h2>`;
     };
     updateCountdown();
-    setInterval(updateCountdown, 1000); // Update every second
-
-    document.body.appendChild(container);
+    this._countdownTimer = setInterval(updateCountdown, 1000);
+    this.innerHTML = ""; // Очищаем
+    this.appendChild(container);
   });
 };
 
@@ -465,6 +452,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.datepicker = function ()
           from: selected.from,
           to: selected.to
         });
+        calendar.remove();
       };
       renderCalendar(calendar);
       return calendar;
@@ -605,8 +593,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fileUpload = function (o
   } = options;
   return this.each(function () {
     const container = this;
-
-    // Создаем элементы
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*, .pdf, .txt, .doc, .docx, .xls, .xlsx";
@@ -620,26 +606,20 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fileUpload = function (o
     submitButton.textContent = "Отправить файл";
     submitButton.classList.add("btn-submit");
     submitButton.disabled = true;
-
-    // Открытие выбора файла
     uploadButton.addEventListener("click", () => {
       fileInput.click();
     });
-
-    // Обработка выбора файла
     fileInput.addEventListener("change", e => {
       const files = e.target.files;
       if (files.length > 0) {
         const file = files[0];
         fileInfo.innerHTML = `<span>Вы выбрали файл: ${file.name}</span>`;
-        submitButton.disabled = false; // ✅ включаем кнопку
+        submitButton.disabled = false;
       } else {
         fileInfo.innerHTML = "";
         submitButton.disabled = true;
       }
     });
-
-    // Отправка файла
     submitButton.addEventListener("click", async () => {
       const file = fileInput.files[0];
       if (!file) return;
@@ -652,24 +632,28 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fileUpload = function (o
         });
         if (!res.ok) throw new Error("Ошибка загрузки");
         const result = await res.json();
-        // Используем toast вместо alert
-        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(document.body).showToast("✅ Файл успешно загружен!", "success", 3000);
+        _core__WEBPACK_IMPORTED_MODULE_0__["default"].toast({
+          message: "✅ Файл успешно загружен!",
+          type: "success",
+          duration: 3000
+        });
         console.log(result);
         fileInput.value = "";
         fileInfo.innerHTML = "";
         submitButton.disabled = true;
       } catch (err) {
-        // Используем toast для ошибок
-        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(document.body).showToast("❌ Ошибка загрузки файла", "error", 3000);
+        _core__WEBPACK_IMPORTED_MODULE_0__["default"].toast({
+          message: "❌ Ошибка загрузки файла",
+          type: "error",
+          duration: 3000
+        });
         console.error(err);
       }
     });
-
-    // Добавляем элементы в DOM
     container.appendChild(uploadButton);
     container.appendChild(fileInfo);
     container.appendChild(submitButton);
-    container.appendChild(fileInput); // Обязательно добавить в DOM
+    container.appendChild(fileInput);
   });
 };
 
@@ -856,10 +840,16 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.form = function (options
         const result = await res.json();
         console.log("🟢 Ответ сервера:", result);
         form.reset();
-        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(form).showToast("Форма успешно отправлена!", "success");
+        _core__WEBPACK_IMPORTED_MODULE_0__["default"].toast({
+          message: "Форма успешно отправлена!",
+          type: "success"
+        });
       } catch (err) {
         console.error("🚫 Ошибка отправки:", err.message);
-        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(form).showToast("Произошла ошибка", "error");
+        _core__WEBPACK_IMPORTED_MODULE_0__["default"].toast({
+          message: "Произошла ошибка",
+          type: "error"
+        });
       } finally {
         spinner?.hideSpinner();
       }
@@ -1068,24 +1058,39 @@ $.prototype.loginModal = function (options = {}) {
 
         // Валидация
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          $(modal).showToast("Введите корректный email.", "error");
+          $.toast({
+            message: "Введите корректный email.",
+            type: "error"
+          });
           return;
         }
         if (mode === "register") {
           if (!name || !/^[А-ЯЁA-Z][а-яёa-z]+$/.test(name)) {
-            $(modal).showToast("Имя должно начинаться с заглавной буквы.", "error");
+            $.toast({
+              message: "Имя должно начинаться с заглавной буквы.",
+              type: "error"
+            });
             return;
           }
           if (!/^\+7-\d{3}-\d{3}-\d{2}-\d{2}$/.test(phone)) {
-            $(modal).showToast("Введите корректный телефон в формате +7-XXX-XXX-XX-XX.", "error");
+            $.toast({
+              message: "Введите корректный телефон в формате +7-XXX-XXX-XX-XX.",
+              type: "error"
+            });
             return;
           }
           if (password !== confirmPassword) {
-            $(modal).showToast("Пароли не совпадают.", "error");
+            $.toast({
+              message: "Пароли не совпадают.",
+              type: "error"
+            });
             return;
           }
           if (password.length < 6) {
-            $(modal).showToast("Пароль должен содержать минимум 6 символов.", "error");
+            $.toast({
+              message: "Пароль должен содержать минимум 6 символов.",
+              type: "error"
+            });
             return;
           }
           payload.name = name;
@@ -1096,17 +1101,26 @@ $.prototype.loginModal = function (options = {}) {
         if (mode === "register") {
           Store.setState("authUser", payload);
           localStorage.setItem("authUser", JSON.stringify(payload));
-          $(modal).showToast("Добро пожаловать!", "success");
+          $.toast({
+            message: "Добро пожаловать!",
+            type: "success"
+          });
           closeModal();
         } else if (mode === "login") {
           // Логика входа
           const savedUser = JSON.parse(localStorage.getItem("authUser"));
           if (savedUser && savedUser.email === email && savedUser.password === password) {
-            $(modal).showToast("Вы успешно вошли!", "success");
+            $.toast({
+              message: "Вы успешно вошли!",
+              type: "success"
+            });
             Store.setState("authUser", savedUser);
             closeModal();
           } else {
-            $(modal).showToast("Неверные данные. Зарегистрируйтесь.", "error");
+            $.toast({
+              message: "Неверные данные. Зарегистрируйтесь.",
+              type: "error"
+            });
           }
         }
       });
@@ -1114,10 +1128,20 @@ $.prototype.loginModal = function (options = {}) {
       // Выход из аккаунта
       const logoutButton = form.querySelector(".btn-logout");
       logoutButton.addEventListener("click", () => {
-        // Удаляем данные из localStorage и сбрасываем состояние
+        const savedUser = localStorage.getItem("authUser");
+        if (!savedUser) {
+          $.toast({
+            message: "Вы уже вышли!",
+            type: "error"
+          });
+          return;
+        }
         localStorage.removeItem("authUser");
         Store.setState("authUser", null);
-        $(modal).showToast("Вы вышли из аккаунта", "success");
+        $.toast({
+          message: "Вы вышли из аккаунта",
+          type: "success"
+        });
         closeModal();
       });
     };
@@ -1616,7 +1640,19 @@ themeSwitcherButton.addEventListener("click", () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toast = function ({
+function createToastContainer() {
+  const container = document.createElement("div");
+  container.classList.add("toast-container");
+  document.body.appendChild(container);
+  return container;
+}
+function removeToast(toast) {
+  toast.classList.add("toast-hide");
+  setTimeout(() => toast.remove(), 500);
+}
+
+// Глобальный метод $.toast
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].toast = function ({
   message,
   type = "info",
   duration = 3000
@@ -1629,31 +1665,29 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toast = function ({
         <button class="toast-close">&times;</button>
     `;
   toastContainer.appendChild(toast);
+
+  // Удаляем через timeout
   setTimeout(() => removeToast(toast), duration);
-  toast.querySelector(".toast-close").addEventListener("click", () => removeToast(toast));
-};
-function createToastContainer() {
-  const container = document.createElement("div");
-  container.classList.add("toast-container");
-  document.body.appendChild(container);
-  return container;
-}
-function removeToast(toast) {
-  toast.classList.add("toast-hide");
-  setTimeout(() => toast.remove(), 500);
-}
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.showToast = function (message, type = "info", duration = 3000) {
-  this.toast({
-    message,
-    type,
-    duration
+
+  // Удаляем по нажатию на крестик
+  toast.querySelector(".toast-close").addEventListener("click", () => {
+    removeToast(toast);
   });
 };
-(0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])("[data-toast]").click(function () {
-  const message = this.getAttribute("data-toast-message") || "Уведомление";
-  const type = this.getAttribute("data-toast-type") || "info";
-  const duration = this.getAttribute("data-toast-duration") || 3000;
-  (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this).showToast(message, type, duration);
+
+// Автоматическая инициализация по атрибуту data-toast
+document.addEventListener("click", e => {
+  const target = e.target.closest("[data-toast]");
+  if (target) {
+    const message = target.getAttribute("data-toast-message") || "Уведомление";
+    const type = target.getAttribute("data-toast-type") || "info";
+    const duration = parseInt(target.getAttribute("data-toast-duration")) || 3000;
+    _core__WEBPACK_IMPORTED_MODULE_0__["default"].toast({
+      message,
+      type,
+      duration
+    });
+  }
 });
 
 /***/ }),
@@ -2391,13 +2425,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
 const Router = {
   routes: [],
   currentRoute: null,
   mode: "history",
+  basePath: "/VKR",
+  // если проект в подкаталоге
   components: {},
-  // 🔹 Список зарегистрированных компонентов
-
   init(mode = "history") {
     this.mode = mode;
     if (mode === "history") {
@@ -2405,10 +2441,11 @@ const Router = {
     } else {
       window.addEventListener("hashchange", this.onHashChange.bind(this));
     }
-    if (!this.findRoute(this.getCurrentPath())) {
+    const currentPath = this.getCurrentPath() || "/";
+    if (!this.findRoute(currentPath)) {
       this.navigate("/");
     } else {
-      this.renderRoute(this.getCurrentPath());
+      this.renderRoute(currentPath);
     }
   },
   addRoute(path, component, options = {}) {
@@ -2440,39 +2477,56 @@ const Router = {
     }
   },
   getCurrentPath() {
-    return this.mode === "history" ? window.location.pathname : window.location.hash.slice(1);
+    const rawPath = this.mode === "history" ? window.location.pathname : window.location.hash.slice(1);
+    return this.mode === "history" && this.basePath ? rawPath.replace(this.basePath, "") || "/" : rawPath || "/";
   },
   updateHistory(path) {
     if (this.mode === "history") {
-      window.history.pushState({}, "", path);
+      const fullPath = this.basePath ? `${this.basePath}${path}` : path;
+      window.history.pushState({}, "", fullPath);
     } else {
       window.location.hash = path;
     }
   },
-  // 🔹 **Обновленный метод renderRoute()**
   renderRoute(path) {
+    const existingDatepicker = document.querySelector(".datepicker");
+    if (existingDatepicker) {
+      existingDatepicker.remove();
+    }
     const route = this.findRoute(path);
     const rootElement = document.getElementById("app");
     if (!route) {
       rootElement.innerHTML = "<h1>404 - Страница не найдена</h1>";
       return;
     }
-
-    // 🔹 Проверяем, является ли компонентом
-    if (this.components[route.component]) {
-      rootElement.innerHTML = this.renderComponent(route.component);
-    } else if (typeof route.component === "function") {
-      route.component().then(html => rootElement.innerHTML = html);
-    } else {
-      rootElement.innerHTML = route.component;
-    }
-
-    // Обновление мета-тегов
+    const html = this.renderComponent(route.component);
+    rootElement.innerHTML = html;
+    requestAnimationFrame(() => {
+      const component = this.components[route.component];
+      if (typeof component?.mounted === "function") {
+        component.mounted();
+      }
+    });
     document.title = route?.title || "SPA Page";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", route?.description || "");
     }
+  },
+  renderComponent(name, props = {}) {
+    const component = this.components[name];
+    if (!component) {
+      console.error(`Компонент ${name} не найден`);
+      return "";
+    }
+    let html = component.template;
+    if (component.state) {
+      Object.keys(component.state).forEach(key => {
+        const regex = new RegExp(`{{${key}}}`, "g");
+        html = html.replace(regex, component.state[key]);
+      });
+    }
+    return html; // ❗ HTML возвращается, но не вставляется
   },
   onPopState() {
     this.renderRoute(this.getCurrentPath());
@@ -2493,30 +2547,11 @@ const Router = {
     const match = path.match(new RegExp(`^${route.path}$`));
     return match?.groups || {};
   },
-  // 📌 **Метод для регистрации компонентов**
   component(name, options) {
     this.components[name] = options;
-  },
-  // 📌 **Метод для рендеринга компонентов**
-  renderComponent(name, props = {}) {
-    const component = this.components[name];
-    if (!component) {
-      console.error(`Компонент ${name} не найден`);
-      return "";
-    }
-    let html = component.template;
-    if (component.state) {
-      Object.keys(component.state).forEach(key => {
-        const regex = new RegExp(`{{${key}}}`, "g");
-        html = html.replace(regex, component.state[key]);
-      });
-    }
-    if (typeof component.mounted === "function") {
-      setTimeout(() => component.mounted(props), 0);
-    }
-    return html;
   }
 };
+window.Router = Router;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Router);
 
 /***/ }),
@@ -2532,6 +2567,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
 const Storage = {
   setItem(key, value) {
     try {
@@ -2610,6 +2647,7 @@ const Storage = {
     });
   }
 };
+window.Storage = Storage;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Storage);
 
 /***/ }),
@@ -2625,6 +2663,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
 const Store = function () {
   let state = {};
   const listeners = {};
@@ -18013,517 +18053,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     Router.init("history"); // Можно заменить на "hash"
-
-//     Router.addRoute("/", "<h1>Главная</h1>", { title: "Главная страница" });
-//     Router.addRoute(
-//         "/about",
-//         `
-
-//         <div class="goods d-flex f-space-around">
-//             <div class="card">
-//                 <img class="card-img" src="https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple_Shot-on-iPhone-Challenge-2020_Austin-Mann_01072020_big.jpg.large.jpg" alt="photo">
-//                 <div class="card-body">
-//                     <div class="card-title">Card title</div>
-//                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia itaque placeat qui suscipit.</p>
-//                     <a href="#" id="trigger" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Link to</a>
-//                 </div>
-//             </div>
-//             <div class="card">
-//                 <img class="card-img" src="https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple_Shot-on-iPhone-Challenge-2020_Austin-Mann_01072020_big.jpg.large.jpg" alt="photo">
-//                 <div class="card-body">
-//                     <div class="card-title">Card title #2</div>
-//                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia itaque placeat qui suscipit.</p>
-//                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">Link to</a>
-//                 </div>
-//             </div>
-//         </div>
-//     `,
-//         { title: "О компании" }
-//     );
-
-//     Router.addRoute("/contact", "<h1>Контакты</h1>", { title: "Контакты" });
-//     Router.addRoute(
-//         "/user/:id",
-//         (params) => `<h1>Профиль пользователя ${params.id}</h1>`,
-//         { title: "Профиль" }
-//     );
-//     Router.addRoute("/admin", "<h1>Админ панель</h1>", {
-//         title: "Админка",
-//         beforeEnter: () => {
-//             if (!localStorage.getItem("auth")) {
-//                 alert("Нет доступа!");
-//                 return false;
-//             }
-//             return true;
-//         },
-//         afterEnter: () => console.log("Зашли в админку"),
-//     });
-
-//     // Добавляем обработчики событий для навигации
-//     document
-//         .getElementById("home")
-//         .addEventListener("click", () => Router.navigate("/"));
-//     document
-//         .getElementById("about")
-//         .addEventListener("click", () => Router.navigate("/about"));
-//     document
-//         .getElementById("contact")
-//         .addEventListener("click", () => Router.navigate("/contact"));
-//     document
-//         .getElementById("profile")
-//         .addEventListener("click", () => Router.navigate("/user/42"));
-//     document
-//         .getElementById("admin")
-//         .addEventListener("click", () => Router.navigate("/admin"));
-// });
-
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 Router initialized");
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].init("history");
-
-  // 📌 **Компонент "Главная"**
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].component("HomePage", {
-    template: `
-            <h1>Добро пожаловать</h1>
-            <p>Это главная страница</p>
-        `
-  });
-
-  // 📌 **Компонент "О нас"**
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].component("AboutPage", {
-    template: `
-            <!-- Modal -->
-            <div class="goods d-flex f-space-around">
-                <div class="card">
-                    <img
-                        class="card-img"
-                        src="https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple_Shot-on-iPhone-Challenge-2020_Austin-Mann_01072020_big.jpg.large.jpg"
-                        alt="photo"
-                    />
-                    <div class="card-body">
-                        <div class="card-title">Card title</div>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Officia itaque placeat qui suscipit.
-                        </p>
-                        <a
-                            href="#"
-                            id="trigger"
-                            class="btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#exampleModal"
-                            >Link to</a
-                        >
-                    </div>
-                </div>
-                <div class="card">
-                    <img
-                        class="card-img"
-                        src="https://www.apple.com/newsroom/images/product/iphone/lifestyle/Apple_Shot-on-iPhone-Challenge-2020_Austin-Mann_01072020_big.jpg.large.jpg"
-                        alt="photo"
-                    />
-                    <div class="card-body">
-                        <div class="card-title">Card title #2</div>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Officia itaque placeat qui suscipit.
-                        </p>
-                        <a
-                            href="#"
-                            class="btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#exampleModal2"
-                            >Link to</a
-                        >
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal" id="exampleModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <button class="close" data-close>
-                            <span>&times;</span>
-                        </button>
-                        <div class="modal-header">
-                            <div class="modal-title">Modal title</div>
-                        </div>
-                        <div class="modal-body">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Harum minus doloremque nesciunt enim rem quam
-                            corporis? Dolorem pariatur magnam distinctio
-                            perferendis. Ratione dolorem voluptates iusto
-                            facilis odit veritatis, suscipit voluptatibus!
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" data-close>
-                                Close
-                            </button>
-                            <button class="btn btn-success">
-                                Save changes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal" id="exampleModal2">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <button class="close" data-close>
-                            <span>&times;</span>
-                        </button>
-                        <div class="modal-header">
-                            <div class="modal-title">Modal title #2</div>
-                        </div>
-                        <div class="modal-body">Lorem ipsum dolor sit</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" data-close>
-                                Close
-                            </button>
-                            <button class="btn btn-success">
-                                Save changes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `,
-    mounted() {
-      (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])('[data-toggle="modal"]').modal();
-    }
-  });
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].component("ContactPage", {
-    template: `<div class="form-container block-center mt-40"></div>`,
-    mounted() {
-      (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(".form-container").form({
-        action: "https://your-api-server.com/api/send",
-        // Подставь свой адрес
-        method: "POST",
-        fields: [{
-          name: "name",
-          label: "Имя",
-          type: "text",
-          required: true
-        }, {
-          name: "surname",
-          label: "Фамилия",
-          type: "text",
-          required: true
-        }, {
-          name: "email",
-          label: "Email",
-          type: "email",
-          required: true
-        }, {
-          name: "phone",
-          label: "Телефон",
-          type: "tel",
-          required: true
-        }, {
-          name: "dob",
-          label: "Дата рождения",
-          type: "date"
-        }, {
-          name: "gender",
-          label: "Пол",
-          type: "select",
-          options: [{
-            value: "",
-            label: "Выберите"
-          }, {
-            value: "male",
-            label: "Мужской"
-          }, {
-            value: "female",
-            label: "Женский"
-          }]
-        }, {
-          name: "consent",
-          label: "Согласие на обработку данных",
-          type: "checkbox",
-          required: true
-        }, {
-          name: "message",
-          label: "Сообщение",
-          type: "textarea"
-        }],
-        submitLabel: "Отправить данные"
-      });
-    }
-  });
-
-  // 📌 **Компонент "Профиль пользователя" с state**
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].component("UserProfile", {
-    template: `
-            <h1>Профиль пользователя</h1>
-            <p>Имя: {{username}}</p>
-            <p>Возраст: {{age}}</p>
-        `,
-    state: {
-      username: "Иван",
-      age: 25
-    }
-  });
-
-  // 📌 **Регистрация маршрутов с компонентами**
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].addRoute("/", "HomePage", {
-    title: "Главная страница"
-  });
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].addRoute("/about", "AboutPage", {
-    title: "О компании"
-  });
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].addRoute("/user", "UserProfile", {
-    title: "Профиль"
-  });
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].addRoute("/contact", "ContactPage", {
-    title: "Контакты"
-  });
-
-  // 📌 **Кнопки навигации**
-  document.getElementById("home").addEventListener("click", () => _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].navigate("/"));
-  document.getElementById("about").addEventListener("click", () => _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].navigate("/about"));
-  document.getElementById("profile").addEventListener("click", () => _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].navigate("/user"));
-  document.getElementById("contact").addEventListener("click", () => {
-    _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].navigate("/contact");
-  });
-});
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Анимации загружены!");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#fadeInBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").fadeIn(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#fadeOutBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").fadeOut(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#fadeToggleBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").fadeToggle(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#slideUpBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").slideUp(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#slideDownBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").slideDown(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#slideToggleBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").slideToggle(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#scaleInBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").scaleIn(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#scaleOutBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").scaleOut(500));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#bounceBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").bounce(3, 10, 150));
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#shakeBtn").on("click", () => (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#testBox").shake(4, 8, 100));
-});
-document.getElementById("saveUser").addEventListener("click", () => {
-  _lib_modules_storage__WEBPACK_IMPORTED_MODULE_2__["default"].setItem("user", {
-    name: "Иван",
-    age: 25
-  });
-  console.log("✅ Пользователь сохранен в localStorage!");
-});
-document.getElementById("getUser").addEventListener("click", () => {
-  const user = _lib_modules_storage__WEBPACK_IMPORTED_MODULE_2__["default"].getItem("user");
-  console.log("👤 Данные пользователя из localStorage:", user);
-});
-document.getElementById("clearUser").addEventListener("click", () => {
-  _lib_modules_storage__WEBPACK_IMPORTED_MODULE_2__["default"].removeItem("user");
-  console.log("🗑️ Пользователь удален из localStorage!");
-});
-document.getElementById("cacheRequest").addEventListener("click", async () => {
-  const data = await _lib_modules_storage__WEBPACK_IMPORTED_MODULE_2__["default"].fetchWithCache("https://jsonplaceholder.typicode.com/users/1");
-  console.log("📦 Данные из API или кеша:", data);
-});
-document.getElementById("clearCache").addEventListener("click", () => {
-  _lib_modules_storage__WEBPACK_IMPORTED_MODULE_2__["default"].clearCache();
-  console.log("🗑️ Кеш очищен!");
-});
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 Тестирование классов и атрибутов");
-
-  // Создаем тестовый элемент
-  const testElement = document.createElement("div");
-  testElement.textContent = "Тестовый блок";
-  testElement.style.padding = "20px";
-  testElement.style.margin = "10px";
-  testElement.style.border = "2px solid black";
-  document.body.appendChild(testElement);
-
-  // Тестируем классы
-  console.log("✅ Добавляем классы:");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(testElement).addClass("bg-primary", "text-white");
-  console.log(testElement.classList);
-  console.log("✅ Удаляем класс 'bg-primary':");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(testElement).removeClass("bg-primary");
-  console.log(testElement.classList);
-  console.log("✅ Переключаем класс 'border-red':");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(testElement).toggleClass("border-red");
-  console.log(testElement.classList);
-
-  // Тестируем атрибуты
-  console.log("✅ Устанавливаем атрибуты:");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(testElement).setAttributes({
-    "data-role": "test",
-    "aria-hidden": "true"
-  });
-  console.log(testElement.getAttribute("data-role"));
-  console.log(testElement.getAttribute("aria-hidden"));
-  console.log("✅ Переключаем атрибуты:");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(testElement).toggleAttributes({
-    "data-role": "test"
-  });
-  console.log(testElement.getAttribute("data-role"));
-  console.log("✅ Удаляем атрибут 'aria-hidden':");
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(testElement).removeAttributes("aria-hidden");
-  console.log(testElement.getAttribute("aria-hidden"));
-});
-document.getElementById("increaseProgress").addEventListener("click", () => {
-  const progress = document.getElementById("progress1");
-  let currentValue = parseInt(progress.querySelector(".progress-bar").style.width);
-  let newValue = Math.min(currentValue + 2, 100);
-  progress.updateProgress(newValue);
-});
-document.getElementById("resetProgress").addEventListener("click", () => {
-  const progress = document.getElementById("progress1");
-  progress.updateProgress(0);
-});
-document.getElementById("showSpinner").addEventListener("click", () => {
-  const spinner = document.getElementById("spinner1");
-  spinner.showSpinner();
-});
-document.getElementById("hideSpinner").addEventListener("click", () => {
-  const spinner = document.getElementById("spinner1");
-  spinner.hideSpinner();
-});
-document.addEventListener("DOMContentLoaded", () => {
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("[data-lightbox]").lightbox();
-});
-document.addEventListener("DOMContentLoaded", () => {
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("[data-tabpanel] .tab-item").tab({
-    animated: true,
-    // или false
-    remote: false // или false, если не используешь data-tab-url
-  });
-});
-(0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#date").datepicker();
-const products = [{
-  id: 1,
-  title: "Кроссовки Nike Air Max",
-  price: 8990,
-  image: "https://www.shoes-report.ru/upload/resize_cache/webp/iblock/586/sstwystwcedl99sipbvyy97hlvsl79gw.webp",
-  description: "Классические кроссовки Nike с отличной амортизацией.",
-  details: "Подробное описание...",
-  category: "Обувь",
-  brand: "Nike",
-  sku: "NK-AIR-001",
-  discount: 15,
-  video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-}, {
-  id: 2,
-  title: "Футболка Puma",
-  price: 1990,
-  image: "https://www.shoes-report.ru/upload/resize_cache/webp/iblock/586/sstwystwcedl99sipbvyy97hlvsl79gw.webp",
-  description: "Удобная повседневная футболка."
-}, {
-  id: 3,
-  title: "Кепка Adidas",
-  price: 990,
-  image: "https://www.shoes-report.ru/upload/resize_cache/webp/iblock/586/sstwystwcedl99sipbvyy97hlvsl79gw.webp",
-  description: "Лёгкая кепка с защитой от солнца."
-}, {
-  id: 4,
-  title: "Рюкзак Supreme",
-  price: 4590,
-  image: "https://www.shoes-report.ru/upload/resize_cache/webp/iblock/586/sstwystwcedl99sipbvyy97hlvsl79gw.webp",
-  description: "Стильный рюкзак для города и путешествий.",
-  details: "Подробное описание товара: технология подошвы, материал, и т.дdsadasddassdasddas."
-}];
-(0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(".catalog").catalog({
-  products,
-  columns: 4,
-  showBuyButton: true,
-  showDetailsButton: true,
-  showImage: true,
-  showPrice: true,
-  showDescription: true
-});
-(0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#auth-button").on("click", () => {
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("body").loginModal({
-    apiUrl: "/api/auth" // оставь путь как фиктивный
-  });
-});
-(0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])("#countdown").countdown({
-  endDate: "2025-04-02 23:59:59",
-  // Установите дату окончания акции
-  labelText: "До окончания акции осталось:" // Пользовательский текст
-});
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 Router initialized");
-  _lib_modules_router__WEBPACK_IMPORTED_MODULE_0__["default"].init("history");
-
-  // 📌 Инициализация загрузки файла
-  const fileUploadContainer = document.getElementById("file-upload-container");
-  if (fileUploadContainer) {
-    (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(fileUploadContainer).fileUpload({
-      apiUrl: "/upload-endpoint",
-      buttonText: "Выберите файл для загрузки"
-    });
-  }
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const ratingContainer = document.getElementById("rating-container");
-
-  // Инициализируем рейтинг, устанавливаем начальное значение из Store
-  if (ratingContainer) {
-    (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(ratingContainer).rating({
-      totalStars: 5,
-      defaultRating: Store.getState("rating") || 0,
-      // Получаем рейтинг из Store
-      onRatingChange: newRating => {
-        console.log("Новый рейтинг: " + newRating);
-        // Можно отправить этот рейтинг на сервер, если нужно
-      }
-    });
-  }
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebarContainer = document.getElementById("sidebar-container");
-
-  // Инициализация компонента Sidebar
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(sidebarContainer).sidebar({
-    socialLinks: {
-      telegram: true,
-      instagram: true,
-      facebook: true,
-      github: true,
-      twitch: true,
-      youtube: true,
-      // You can set to false to hide YouTube
-      pinterest: true,
-      twitter: true,
-      tiktok: true,
-      whatsapp: true,
-      reddit: true
-    }
-  });
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const chartContainer = document.getElementById("chart-container");
-
-  // Данные и настройки для графика
-  const chartOptions = {
-    type: "bar",
-    // Тип графика: столбчатый
-    labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь"],
-    data: [12, 19, 3, 5, 2, 3],
-    // Данные для графика
-    backgroundColor: "rgba(255, 99, 132, 0.2)",
-    // Цвет фона столбцов
-    borderColor: "rgba(255, 99, 132, 1)",
-    // Цвет границ столбцов
-    borderWidth: 1,
-    // Толщина границы
-    title: "Месячные продажи" // Заголовок графика
-  };
-
-  // Вставляем график в контейнер
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(chartContainer).chart(chartOptions);
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const dragContainer = document.getElementById("drag-container");
-
-  // Применяем компонент drag-and-drop к контейнеру
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_1__["default"])(dragContainer).dragAndDrop();
-});
 })();
 
 /******/ })()

@@ -208,10 +208,13 @@ $.prototype.form = function (options = {}) {
                 const result = await res.json();
                 console.log("🟢 Ответ сервера:", result);
                 form.reset();
-                $(form).showToast("Форма успешно отправлена!", "success");
+                $.toast({
+                    message: "Форма успешно отправлена!",
+                    type: "success",
+                });
             } catch (err) {
                 console.error("🚫 Ошибка отправки:", err.message);
-                $(form).showToast("Произошла ошибка", "error");
+                $.toast({ message: "Произошла ошибка", type: "error" });
             } finally {
                 spinner?.hideSpinner();
             }

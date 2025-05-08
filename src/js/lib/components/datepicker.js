@@ -153,6 +153,8 @@ $.prototype.datepicker = function () {
                     from: selected.from,
                     to: selected.to,
                 });
+
+                calendar.remove();
             };
 
             renderCalendar(calendar);

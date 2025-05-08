@@ -1,3 +1,5 @@
+import $ from "../core";
+
 const Store = (function () {
     let state = {};
     const listeners = {};

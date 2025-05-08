@@ -4,7 +4,7 @@ const $ = function (selector) {
 
 $.prototype.init = function (selector) {
     if (!selector) {
-        return this; //{}пустой объект
+        return this;
     }
 
     if (selector.tagName) {
@@ -18,8 +18,8 @@ $.prototype.init = function (selector) {
     return this;
 };
 
-// Устанавливаем прототип объекта, созданного `$.prototype.init`, на прототип самого `$`.
-// Это нужно для того, чтобы методы, определенные на `$.prototype`, были доступны и на объекте, созданном `$.prototype.init`.
+// ⁡⁣⁢⁣Устанавливаем прототип объекта, созданного `$.prototype.init`, на прототип самого `$`.⁡
+// ⁡⁢⁣⁣Это нужно для того, чтобы методы, определенные на `$.prototype`, были доступны и на объекте, созданном `$.prototype.init`.⁡
 $.prototype.init.prototype = $.prototype;
 
 window.$ = $;
