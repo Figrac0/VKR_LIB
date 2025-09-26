@@ -7,6 +7,7 @@ The library was designed to be simple, flexible, and fast to integrate into any 
 ## 🚀 Features
 
 - Dynamic routing without page reloads
+- Built-in admin panel 
 - Centralized state management (store)
 - UI components: modal, datepicker, carousel, tabs, toast, etc.
 - Built-in admin panel (via iframe)
@@ -20,7 +21,8 @@ The library was designed to be simple, flexible, and fast to integrate into any 
 - **JavaScript (ES6+)** — core logic and modules  
 - **SASS/SCSS** — modular styles, theming, and responsive design  
 - **Node.js + Gulp** — build automation (optional)  
-- **No external dependencies** — works out of the box with a single `<script>`  
+- **No external dependencies** — works out of the box with a single `<script>`
+-  **PHP** — server-side logic for the admin panel   
 
   ## 📚 Documentation
 
