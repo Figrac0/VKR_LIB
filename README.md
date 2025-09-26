@@ -15,7 +15,7 @@ The library was designed to be simple, flexible, and fast to integrate into any 
 - Lightweight architecture, no external dependencies
 - Cross-browser support(Chrome, Firefox, Edge, Safari)
 
-##🔧 Tech Stack
+## 🔧 Tech Stack
 
 - **JavaScript (ES6+)** — core logic and modules  
 - **SASS/SCSS** — modular styles, theming, and responsive design  
