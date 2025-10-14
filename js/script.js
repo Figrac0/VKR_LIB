@@ -413,7 +413,7 @@ Router.component("CatalogPage", {
                 brand: "Adidas",
                 sku: "AD-YZY-350",
                 discount: 10,
-                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                video: "https://www.youtube.com/watch?v=pO-lm1fL9nY",
             },
             {
                 id: 12,
