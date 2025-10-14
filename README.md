@@ -28,7 +28,15 @@ The library was designed to be simple, flexible, and fast to integrate into any 
 
 - Example usage can be found in the `/examples/` directory.  
 - Detailed user guide is available in *Appendix A* of the diploma project.  
-- Each module (router, store, UI components) is documented with inline comments. 
+- Each module (router, store, UI components) is documented with inline comments.
+
+![Preview 1](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/1.png)
+![Preview 2](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/2.png)
+![Preview 3](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/3.png)
+![Preview 4](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/4.png)
+![Preview 5](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/5.png)
+![Preview 6](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/6.png)
+![Preview 7](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/7.png)
 
 ## 📦 Installation
 
@@ -39,11 +47,5 @@ The library was designed to be simple, flexible, and fast to integrate into any 
 <link rel="stylesheet" href="css/styles.min.css" />
 <script src="js/script.js"></script>
 
-![Preview 1](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/1.png)
-![Preview 2](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/2.png)
-![Preview 3](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/3.png)
-![Preview 4](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/4.png)
-![Preview 5](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/5.png)
-![Preview 6](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/6.png)
-![Preview 7](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/7.png)
+
 
