@@ -30,13 +30,55 @@ The library was designed to be simple, flexible, and fast to integrate into any 
 - Detailed user guide is available in *Appendix A* of the diploma project.  
 - Each module (router, store, UI components) is documented with inline comments.
 
-![Preview 1](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/1.png)
-![Preview 2](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/2.png)
-![Preview 3](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/3.png)
-![Preview 4](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/4.png)
-![Preview 5](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/5.png)
-![Preview 6](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/6.png)
-![Preview 7](https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/7.png)
+<h3 align="center">📸 Project Preview</h3>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/1.png" alt="Preview 1" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/2.png" alt="Preview 2" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/3.png" alt="Preview 3" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/4.png" alt="Preview 4" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/5.png" alt="Preview 5" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/6.png" alt="Preview 6" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/7.png" alt="Preview 7" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/8.png" alt="Preview 8" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/9.png" alt="Preview 9" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/10.png" alt="Preview 10" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/11.png" alt="Preview 11" width="500"/><br/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Figrac0/VKR_LIB/lib_spa_fin/img/12.png" alt="Preview 12" width="500"/><br/>
+</p>
 
 ## 📦 Installation
 
